@@ -1,0 +1,32 @@
+<div style="margin: 0 auto; width: 80%; text-align: center;">
+  <ngx-masonry [ordered]="true" [options]="masonryOptions">
+    <div ngxMasonryItem
+         class="project-card mdc-typography masonry-item"
+         *ngFor="let current of projects"
+         style="width: 350px;">
+      <div class="project">
+        <!--    implement powerpoints -->
+        <img src="https://upload.wikimedia.org/wikipedia/commons/1/1c/Sevan_Armenia_%D0%A1%D0%B5%D0%B2%D0%B0%D0%BD_%D0%90%D1%80%D0%BC%D0%B5%D0%BD%D0%B8%D1%8F.jpeg"
+             alt="Image of Lake" style="width: 100%">
+      </div>
+      <div class="card-body">
+        <div class="title">
+          <h3>{{current.projectName}}</h3>
+          <h3 *ngIf="current.modern; else notModern">Modern Day</h3>
+          <ng-template #notModern>
+            <h3>{{current.startTime}} - {{this.current.endTime}}</h3>
+          </ng-template>
+        </div>
+        <div class="description mdc-typography--body1">
+          <p>
+            {{this.current.description}}
+          </p>
+        </div>
+        <div class="button-container">
+          <button class="buttons">View Tags</button>
+          <button class="buttons" title="hello world">View Project</button>
+        </div>
+      </div>
+    </div>
+  </ngx-masonry>
+</div>
