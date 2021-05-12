@@ -1,0 +1,38 @@
+version: '3.8'
+
+volumes:
+  angular_node_modules:
+  express_node_modules:
+
+services:
+  frontend:
+    build: frontend
+    ports:
+      - "4200:4200"
+    volumes:
+      - ./frontend:/map-app
+      - angular_node_modules:/frontend/node_modules
+
+  express:
+    build: api
+    command: npx nodemon index.js
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./api:/api
+      - express_node_modules:/api/node_modules
+
+  db:
+    image: mysql:8
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "8080:8080"
